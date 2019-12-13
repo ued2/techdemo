@@ -1,0 +1,6 @@
+{
+    "python.pythonPath": "/Users/udk/.local/share/virtualenvs/techdemo-Fow30o3X/bin/python",
+    "python.linting.pylintEnabled": true,
+    "python.linting.flake8Enabled": false,
+    "python.linting.enabled": false
+}

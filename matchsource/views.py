@@ -3,11 +3,10 @@ from django.core.mail import send_mail
 from django.conf import settings
 from .models import UserSkill
 from .forms import UserSkill
+from matchsource.match import run, match, printing
 
 
 def home(request):
-    print(request.GET)
-    print(request.POST)
     return render(request, 'matchsource/home.html')
 
 
@@ -20,7 +19,8 @@ def form(request):
             skills = request.POST.getlist('skill')
             string = ",".join(skills)
             subject = "Matchsource"
-            message = 'Hi ' + name + ' these are your selected skills ' + string
+            message = 'Hello ' + name + ',' +\
+                ' \nThese are your selected skills [' + string + '].'
             receiver = request.POST['email']
             send_mail(subject, message, settings.EMAIL_HOST_USER,
                       [receiver], fail_silently=False)
@@ -41,7 +41,12 @@ def form(request):
 
 
 def email(request):
-    return render(request, 'matchsource/email.html', {'user': request.POST})
+   # x = run()
+
+    # context = {'data': x
+  #             }
+
+    return render(request, 'matchsource/email.html')
 
 
 def mining(request):

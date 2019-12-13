@@ -10,8 +10,8 @@ class UserSkill(forms.ModelForm):
         widget=forms.EmailInput(attrs={'class': 'form-control',
                                        'placeholder': 'email@abc.com',
                                        }))
-    allskill = ApiSpecific.objects.distinct('specific')
-    skill = forms.ModelMultipleChoiceField(queryset=allskill, to_field_name='specific', required=True,
+    allskill = ApiSpecific.objects.distinct('general')
+    skill = forms.ModelMultipleChoiceField(queryset=allskill, to_field_name='general', required=True,
                                            initial=0,
                                            label='Select your skills',
                                            widget=forms.SelectMultiple(attrs={'class': 'selectpicker',

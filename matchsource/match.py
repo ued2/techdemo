@@ -24,7 +24,7 @@ for project in api:
         '<ApiSpecific: ', '').strip('>]').replace('>', '')).replace(' ', ''))
 
 
-def match():
+def printing():
     if user_skills[-1].split('-')[2] in project_skills:
         print('----------------------------------------------------------------------')
         print('The Project Skills are: ' + str(project_skills) + '\n')
@@ -35,28 +35,34 @@ def match():
         print('----------------------------------------------------------------------')
 
 
-comma = ','
-stop = 0
-
 # multiple entries/skills
-if comma in user_skills[-1].split('-')[2]:
-    print(
-        '----------------------------------------------------------------------')
-    print('The Project Skills are: ' + str(project_skills) + '\n')
-    print(str(user_skills[-1].split('-')[0]) +
-          '\'s user skills are: ' + str(user_skills[-1].split('-')[2]))
-    print(
-        '----------------------------------------------------------------------')
-    while (user_skills[-1].split('-')[2]).count(',') >= stop:
-        if user_skills[-1].split('-')[2].split(',')[stop] in project_skills:
 
-            print(user_skills[-1].split('-')[2].split(',')
-                  [stop]+' matched to Project: ' + project_name)
-            print(
-                '----------------------------------------------------------------------')
-        else:
-            print(user_skills[-1].split('-')[2].split(',')
-                  [stop]+' matched to Project: NONE')
-        stop = stop+1
-else:
-    match()
+
+def match():
+    comma = ','
+    stop = 0
+    if comma in user_skills[-1].split('-')[2]:
+        print(
+            '----------------------------------------------------------------------')
+        print('The Project Skills are: ' + str(project_skills) + '\n')
+        print(str(user_skills[-1].split('-')[0]) +
+              '\'s user skills are: ' + str(user_skills[-1].split('-')[2]))
+        print(
+            '----------------------------------------------------------------------')
+        while (user_skills[-1].split('-')[2]).count(',') >= stop:
+            if user_skills[-1].split('-')[2].split(',')[stop] in project_skills:
+
+                print(user_skills[-1].split('-')[2].split(',')
+                      [stop]+' matched to Project: ' + project_name)
+                print(
+                    '----------------------------------------------------------------------')
+            else:
+                print(user_skills[-1].split('-')[2].split(',')
+                      [stop]+' matched to Project: NONE')
+            stop = stop+1
+    else:
+        printing()
+
+
+def run():
+    return match()

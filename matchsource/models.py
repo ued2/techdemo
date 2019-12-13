@@ -6,13 +6,15 @@
 #   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
-from django.contrib.postgres.fields import ArrayField
 
 
 class UserSkill(models.Model):
     name = models.CharField(max_length=255, blank=True)
     email = models.EmailField(primary_key=True)
     skill = models.TextField(blank=True)
+
+    def __str__(self):
+        return self.name + ' - ' + self.email + ' - ' + self.skill
 
 
 class Api(models.Model):
@@ -35,7 +37,7 @@ class ApiSpecific(models.Model):
         db_table = 'API_specific'
 
     def __str__(self):
-        return self.specific
+        return self.general
 
 
 class ApiSpecificBackup(models.Model):
@@ -180,13 +182,16 @@ class FileApi(models.Model):
 
 
 class Project(models.Model):
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=255, primary_key=True)
     dir_trab = models.CharField(max_length=255)
     language = models.CharField(max_length=255)
 
     class Meta:
         managed = False
         db_table = 'project'
+
+    def __str__(self):
+        return self.name
 
 
 class SocialAuthAssociation(models.Model):

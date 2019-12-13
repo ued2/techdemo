@@ -2,7 +2,7 @@
 
 {% block content %}
 <div style="padding-left:100px">
-    <form action=" " method="POST">
+    <form action="" method="POST">
         {% csrf_token %}
         {{form.as_p}}
         <input class="btn btn-primary" value='submit' type="submit" style="margin-top: 10px;">
