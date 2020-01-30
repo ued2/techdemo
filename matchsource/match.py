@@ -1,7 +1,7 @@
 from django.test import TestCase
 from .models import UserSkill, ApiSpecific, Project
 
-#query data
+# query data
 skills = UserSkill.objects.all()
 api = ApiSpecific.objects.all().distinct('general')
 project_name = (str(Project.objects.all()).replace(
@@ -11,7 +11,7 @@ user_skills = []
 project_skills = []
 count = 0
 
-#takes out unwanted characters 
+# takes out unwanted characters
 for skill in skills:
     # removes extra
     user_skills.append((str(skill).replace("<QuerySet [<ApiSpecific: ", '').replace(
@@ -20,7 +20,7 @@ for skill in skills:
     # exec("user"+str(count)+" = user_skills[count].split('-')")
     count = count+1
 
-#takes out unwanted characters 
+# takes out unwanted characters
 for project in api:
     project_skills.append((str(project).replace("<QuerySet [<ApiSpecific: ", '').replace(
         '<ApiSpecific: ', '').strip('>]').replace('>', '')).replace(' ', ''))
@@ -57,4 +57,3 @@ def match():
             stop = stop+1
     else:
         printing()
-
