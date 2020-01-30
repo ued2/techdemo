@@ -3,7 +3,7 @@ from django.core.mail import send_mail
 from django.conf import settings
 from .models import UserSkill
 from .forms import UserSkill
-from matchsource.match import run, match, printing
+from matchsource.match import match, printing
 
 
 def home(request):
@@ -41,11 +41,6 @@ def form(request):
 
 
 def email(request):
-   # x = run()
-
-    # context = {'data': x
-  #             }
-
     return render(request, 'matchsource/email.html')
 
 

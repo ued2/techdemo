@@ -87,10 +87,10 @@ WSGI_APPLICATION = 'techdemo.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'dev',
-        'USER': 'udk',
-        'PASSWORD': 'Nigerian24',
-        'HOST': '127.0.0.1',
+        'NAME': 'matchsource',
+        'USER': 'matchsource',
+        'PASSWORD': 'matchsource',
+        'HOST': '64.227.61.240',
         'PORT': '5432',
     }
 }
