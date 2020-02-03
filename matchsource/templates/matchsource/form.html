@@ -1,7 +1,7 @@
 {% extends 'matchsource/base.html'%}
 
 {% block content %}
-<div style="padding-left:100px">
+<div class="mx-auto">
     <form action="" method="POST">
         {% csrf_token %}
         {{form.as_p}}
