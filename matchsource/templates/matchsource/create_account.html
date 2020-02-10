@@ -1,0 +1,33 @@
+{% extends 'matchsource/base.html'%}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<form method="POST" action="">
+    {% csrf_token %}
+
+    <div> {{form.username.label}}
+    {{form.username}}</div>
+    <div>{{form.email.label}}
+    {{form.email}}</div>
+    <div>
+    {{form.password1.label}}
+    {{form.password1}}
+</div>
+    <div>
+    {{form.password2.label}}
+    {{form.password2}}
+</div>
+   
+<div>
+    {{form.Github.label}}
+    {{form.Github}}
+</div>
+
+    {{form.errors}}
+
+    <input class="btn btn-secondary" type="submit" value='Create Account' name='Create User'>
+    If you have an account, <a href="{% url 'ms-login'%}">login</a> instead.
+</form>
+
+{% endblock content %}

@@ -25,8 +25,12 @@ SECRET_KEY = 'fx@d5tpa*y+=g1%v3yx#cy0cr(7j+ly9)tt_20%ehirg!wn1hl'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['64.227.61.240']
+ALLOWED_HOSTS = ['64.227.61.240', '127.0.0.1', 'localhost']
 
+STATICFILES_DIR = [
+    "/matchsource/static",
+]
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # Application definition
 
@@ -39,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'social_django',
+    'crispy_forms',
 
 ]
 

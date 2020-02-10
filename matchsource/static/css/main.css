@@ -1,0 +1,15 @@
+.navbar {
+    border: 0;
+    border-radius: 0;
+    margin-bottom: 0;
+    font-size: 12px;
+    letter-spacing: 2px;
+}
+
+a {
+    letter-spacing: 2px;
+}
+
+div {
+	padding: 10px;
+}

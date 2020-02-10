@@ -2,14 +2,6 @@
 
 {% block content %}
 
-<div class="text-center">
-</div>
+<a role="button" class="btn btn-secondary btn-lg " href="{% url 'ms-create'%}">Create Account<a>
 
-<div>
-    <div class="text-center">
-        <a role="button" class="btn btn-primary btn-lg " href="{% url 'social:begin' 'github'%}">Login</a>
-        <a role="button" class="btn btn-secondary btn-lg " href="{% url 'ms-form'%}">Questionnaire<a>
-    </div>
-
-</div>
-{% endblock content %}
+                {% endblock content %}
