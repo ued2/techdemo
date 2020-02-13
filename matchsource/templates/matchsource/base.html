@@ -19,19 +19,19 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <title>MatchSource</title>
 </head>
-<!-- navbar-->
+
+<body>
+    <!-- navbar-->
 <nav class="navbar navbar-dark bg-dark">
     <a class="navbar-brand" href="{% url 'ms-home'%}">
         MATCH SOURCE
     </a>
     <ul class="nav navbar-right">
+        <li class="navbar-brand" > Hello, {{request.user}} </li>
         <li><a class="navbar-brand" href="{% url 'ms-login'%}">Login</a></li>
         <li><a class="navbar-brand" href="{% url 'ms-logout'%}">Logout</a></li>
     </ul>
 </nav>
-
-<body>
-
 
     <div class="container">
         <div class="text-center">

@@ -16,9 +16,15 @@
     {{form.password1}}
 	</div>
     
-
+    {% if messages %}
+        {% for message in messages %}
+            {{ message }}
+        {% endfor %}
+    {% endif %}
+    
     <input class="btn btn-secondary" type="submit" value='Login' name='Create User'>
     Dont have an account? <a href="{% url 'ms-create'%}">Create Account</a> instead.
 </form>
+
 
 {% endblock content %}

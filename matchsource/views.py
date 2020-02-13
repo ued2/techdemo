@@ -1,11 +1,12 @@
 from django.shortcuts import render, redirect
+from django.http import HttpResponse, HttpResponseRedirect
 from django.core.mail import send_mail
 from django.conf import settings
 from .models import UserSkill
 from .forms import UserSkill
 from matchsource.match import match, printing
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.contrib.auth import logout, authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from .forms import CreateUserForm
 from django.contrib import messages
 
@@ -40,7 +41,7 @@ def questionnaire(request):
         'form': forms
     }
 
-    return render(request, 'matchsource/form.html', context)
+    return render(request, 'matchsource/questionnaire.html', context)
 
 
 def email(request):
@@ -74,12 +75,28 @@ def create_account(request):
     return render(request, 'matchsource/create_account.html', context)
 
 
-def login(request):
+def login_page(request):
     form = CreateUserForm()
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password1']
+
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            return redirect('ms-home')
+        else:
+            messages.info(request, 'Username OR Password is incorrect')
+            return redirect('ms-login')
     context = {
         'form': form
     }
     return render(request, 'matchsource/login.html',context)
+
+def logout_user(request):
+    logout(request)
+    return redirect('ms-login')
 
 def  matches(request):
     return render(request, 'matchsource/matches.html')

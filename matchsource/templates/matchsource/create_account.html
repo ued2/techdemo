@@ -26,6 +26,12 @@
 
     {{form.errors}}
 
+     {% if messages %}
+        {% for message in messages %}
+            {{ message }}
+        {% endfor %}
+    {% endif %}
+
     <input class="btn btn-secondary" type="submit" value='Create Account' name='Create User'>
     If you have an account, <a href="{% url 'ms-login'%}">login</a> instead.
 </form>
