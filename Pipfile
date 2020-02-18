@@ -10,6 +10,9 @@ flake8 = "*"
 
 [packages]
 django = "*"
+psycog2-binary = "*"
+django-cripsy-forms = "*"
+social-auth-app-django = "*"
 
 [requires]
 python_version = "3.7"
