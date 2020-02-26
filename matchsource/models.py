@@ -2,20 +2,10 @@
 # You'll have to do the following manually to clean this up:
 #   * Rearrange models' order
 #   * Make sure each model has one field with primary_key=True
-#   * Make sure each ForeignKey has `on_delete` set to the desired behavior.
+#   * Make sure each ForeignKey and OneToOneField has `on_delete` set to the desired behavior
 #   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
-
-
-class UserSkill(models.Model):
-    name = models.CharField(max_length=255, blank=True)
-    email = models.EmailField(primary_key=True)
-    skill = models.TextField(blank=True)
-
-    def __str__(self):
-        return self.name + ' - ' + self.email + ' - ' + self.skill
-
 
 class Api(models.Model):
     api_name = models.CharField(max_length=255, primary_key=True)
@@ -167,7 +157,6 @@ class File(models.Model):
     project = models.CharField(max_length=255)
 
     class Meta:
-        managed = False
         db_table = 'file'
 
 
@@ -177,7 +166,6 @@ class FileApi(models.Model):
     count = models.IntegerField()
 
     class Meta:
-        managed = False
         db_table = 'file_API'
 
 
@@ -187,69 +175,25 @@ class Project(models.Model):
     language = models.CharField(max_length=255)
 
     class Meta:
-        managed = False
         db_table = 'project'
 
     def __str__(self):
         return self.name
 
+class UserSkill(models.Model):
+    name = models.CharField(max_length=255, blank=True)
+    email = models.EmailField(primary_key=True)
+    skill = models.TextField(blank=True)
+    
+    class Meta:
+        db_table = 'matchsource_userskill'
 
-class SocialAuthAssociation(models.Model):
-    server_url = models.CharField(max_length=255)
-    handle = models.CharField(max_length=255)
-    secret = models.CharField(max_length=255)
-    issued = models.IntegerField()
-    lifetime = models.IntegerField()
-    assoc_type = models.CharField(max_length=64)
+    def __str__(self):
+        return self.name + ' - ' + self.email + ' - ' + self.skill
+
+class GitHub(models.Model):
+    user = models.CharField(max_length=255, blank=True)
+    github = models.CharField(max_length=255, blank=True)
 
     class Meta:
-        managed = False
-        db_table = 'social_auth_association'
-        unique_together = (('server_url', 'handle'),)
-
-
-class SocialAuthCode(models.Model):
-    email = models.CharField(max_length=254)
-    code = models.CharField(max_length=32)
-    verified = models.BooleanField()
-    timestamp = models.DateTimeField()
-
-    class Meta:
-        managed = False
-        db_table = 'social_auth_code'
-        unique_together = (('email', 'code'),)
-
-
-class SocialAuthNonce(models.Model):
-    server_url = models.CharField(max_length=255)
-    timestamp = models.IntegerField()
-    salt = models.CharField(max_length=65)
-
-    class Meta:
-        managed = False
-        db_table = 'social_auth_nonce'
-        unique_together = (('server_url', 'timestamp', 'salt'),)
-
-
-class SocialAuthPartial(models.Model):
-    token = models.CharField(max_length=32)
-    next_step = models.SmallIntegerField()
-    backend = models.CharField(max_length=32)
-    data = models.TextField()
-    timestamp = models.DateTimeField()
-
-    class Meta:
-        managed = False
-        db_table = 'social_auth_partial'
-
-
-class SocialAuthUsersocialauth(models.Model):
-    provider = models.CharField(max_length=32)
-    uid = models.CharField(max_length=255)
-    extra_data = models.TextField()
-    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
-
-    class Meta:
-        managed = False
-        db_table = 'social_auth_usersocialauth'
-        unique_together = (('provider', 'uid'),)
+        db_table = 'githubusername'
