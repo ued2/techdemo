@@ -6,6 +6,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -22,20 +23,29 @@
 
 <body>
     <!-- navbar-->
-<nav class="navbar navbar-dark bg-dark">
-    <a class="navbar-brand" href="{% url 'ms-home'%}">
-        MATCH SOURCE
-    </a>
-    <ul class="nav navbar-right">
-        <li class="navbar-brand" > Hello, {{request.user}} </li>
-        <li><a class="navbar-brand" href="{% url 'ms-login'%}">Login</a></li>
-        <li><a class="navbar-brand" href="{% url 'ms-logout'%}">Logout</a></li>
-    </ul>
-</nav>
+    <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand" href="{% url 'ms-home'%}">MATCH SOURCE</a>
+        <ul class="nav navbar-right">
+            {% if user.is_authenticated %}
+
+                <li class="navbar-brand" style="text-transform: uppercase" > {{user}} </li>
+                <li><a class="navbar-brand" style="text-transform: uppercase"  href="{% url 'ms-questionnaire'%}">Questionnaire</a></li>
+                <li><a class="navbar-brand" style="text-transform: uppercase"  href="{% url 'ms-matches'%}">Matches</a></li>
+                <li><a class="navbar-brand" style="text-transform: uppercase" href="{% url 'ms-logout'%}">Logout</a></li>
+
+            {% else %}
+
+                <li> <a class="navbar-brand" href="{% url 'ms-login'%}">Login</a></li>
+
+            {% endif %}
+
+        </ul>
+    </nav>
 
     <div class="container">
         <div class="text-center">
-            {% block content %}{% endblock content%}
+            {% block content %}
+            {% endblock content%}
         </div>
     </div>
 

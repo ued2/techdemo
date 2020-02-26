@@ -16,6 +16,7 @@ urlpatterns = [
          views.profile_mining, name='ms-q-profile_mining'),
     path('profile_mining/', views.profile_mining, name='ms-profile_mining'),
     path('matches/', views.matches, name='ms-matches'),
+    path('github/', views.github, name='ms-github'),
 
 
 ]

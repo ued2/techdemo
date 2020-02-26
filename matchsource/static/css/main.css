@@ -4,6 +4,7 @@
     margin-bottom: 0;
     font-size: 12px;
     letter-spacing: 2px;
+    text-transform: uppercase
 }
 
 a {
@@ -12,4 +13,63 @@ a {
 
 div {
 	padding: 10px;
+}
+
+p.skip {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 20px;
+    color: grey;
+}
+
+p.home {
+    font-size: 45px;
+    margin-top: 250px;
+    color:grey;
+}
+
+#home {
+    margin-top: 250px;
+}
+
+#email {
+    color: grey;
+}
+
+.search-container{
+  width: 490px;
+  display: block;
+  margin: 0 auto;
+  color: white;
+  
+}
+
+input#id_github{
+  margin-bottom: 10px;
+  
+  border-radius: 10px;
+  width: 100%;
+  height: 45px;
+  padding: 0 20px;
+  font-size: 2rem;
+  border: 2px solid #ffffff;
+  outline: none;
+  border-style: solid;
+  border-width: thin;
+  
+  background: grey;
+  font-weight: lighter;
+  color:white;
+    
+ }
+
+
+
+i{
+    margin-top: 220px;
+    
+}
+
+#pic{
+    padding-left: 40px;
 }

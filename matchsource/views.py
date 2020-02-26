@@ -7,8 +7,9 @@ from .forms import UserSkill
 from matchsource.match import match, printing
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import authenticate, login, logout
-from .forms import CreateUserForm
+from .forms import CreateUserForm , GitHubSearch
 from django.contrib import messages
+
 
 def home(request):
     return render(request, 'matchsource/home.html')
@@ -59,16 +60,20 @@ def create_account(request):
         form = CreateUserForm(request.POST)
         if form.is_valid():
             form.save()
-            user = form.cleaned_data.get('username')
-            messages.success(request, 'Account was created for ' + user)
-            print(request.POST)
-            Github = request.POST['Github']
-            return redirect('ms-login')
-            #if Github == True:
-            #    return redirect(ms-ca-questionnaire)
-            #print(Github)
-            #return redirect()
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password1')
+            github = form.cleaned_data.get('github')
+
+            user = authenticate(request, username=username, password=password)
+            login(request, user)
+
+            if github == 'True':
+                return redirect('ms-github')
+            else:
+                return redirect('ms-questionnaire')
         
+            print(request.POST)
+
     context = {
         'form': form
     }
@@ -89,15 +94,36 @@ def login_page(request):
         else:
             messages.info(request, 'Username OR Password is incorrect')
             return redirect('ms-login')
+            
     context = {
         'form': form
     }
-    return render(request, 'matchsource/login.html',context)
+    return render(request, 'matchsource/login.html', context)
+
 
 def logout_user(request):
     logout(request)
-    return redirect('ms-login')
+    return redirect('ms-home')
 
-def  matches(request):
+def github(request):
+    form = GitHubSearch()
+    if request.method == 'POST':
+        form = GitHubSearch(request.POST)
+        
+        if form.is_valid():
+            form.save()
+            return redirect('ms-home')
+            #username = form.cleaned_data.get('username')
+            #password = form.cleaned_data.get('password1')
+            #github = form.cleaned_data.get('github')
+            #githubusername = request.POST.get("githubusername")
+    
+    print(request.POST)
+    
+    context = {
+        'form': form
+    }
+    return render(request, 'matchsource/github.html',context)
+
+def matches(request):
     return render(request, 'matchsource/matches.html')
-

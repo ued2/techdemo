@@ -1,6 +1,6 @@
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
-from .models import UserSkill, ApiSpecific
+from .models import UserSkill, ApiSpecific , GitHub
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
@@ -10,7 +10,6 @@ from django.contrib.auth.models import User
 class UserSkill(forms.ModelForm):
     # name field
     name = forms.Textarea(attrs={'class': 'form-control',
-                                 'placeholder': 'name',
                                  })
     # email field
     email = forms.EmailField(
@@ -31,19 +30,38 @@ class UserSkill(forms.ModelForm):
 
     class Meta:
         model = UserSkill
+        widgets = {
+            'name': forms.TextInput(attrs={'placeholder': 'Enter name'}),
+        }
         fields = ['name', 'email', 'skill']
 
 
 
 class CreateUserForm(UserCreationForm):
-  TRUE_FALSE_CHOICES = (
-    (True, 'Yes'),
-    (False, 'No')
+    TRUE_FALSE_CHOICES = (
+        (True, 'Yes'),
+        (False, 'No')
     )
 
-  Github = forms.ChoiceField(choices = TRUE_FALSE_CHOICES, label='Do you have a GitHub Account', 
-                              initial='', widget=forms.Select(), required=True)
+    github = forms.ChoiceField(choices=TRUE_FALSE_CHOICES, label='Do you have a GitHub Account',
+                               initial='', widget=forms.Select(), required=True)
 
-  class Meta:
-    model = User 
-    fields = ['username', 'email', 'password1', 'password2', 'Github']
+    class Meta:
+        model=User
+        fields=['username', 'password1', 'password2', 'github']
+
+
+class GitHubSearch(forms.ModelForm):
+
+    github = forms.Textarea(attrs={'class': "search-container",
+                                 })
+
+    class Meta:
+        model=GitHub
+        widgets = {
+            'github': forms.TextInput(attrs={'placeholder': 'Please enter your GitHub username'}),
+        }
+        fields=['github']
+
+
+        
