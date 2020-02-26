@@ -1,0 +1,13 @@
+{% extends 'matchsource/base.html'%}
+{% block content %}
+
+<form method="POST" class="search-container">
+    {% csrf_token %}
+    <i class="fa fa-github" id='pic' style="font-size:75px;color:grey"></i>
+    {{form}}
+    <input class="btn btn-secondary" type="submit" value='submit' name='submit'>
+
+</form>
+
+
+{% endblock content %}
