@@ -192,8 +192,17 @@ class UserSkill(models.Model):
         return self.name + ' - ' + self.email + ' - ' + self.skill
 
 class GitHub(models.Model):
-    user = models.CharField(max_length=255, blank=True)
     github = models.CharField(max_length=255, blank=True)
 
     class Meta:
         db_table = 'githubusername'
+
+
+class Skills(models.Model):
+    file = models.CharField(max_length=255)
+    full_name = models.CharField(max_length=255, primary_key=True)
+    class_name = models.CharField(max_length=255)
+    ref_count = models.IntegerField(blank=True)
+    
+    class Meta:
+        db_table = 'skillss'

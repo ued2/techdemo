@@ -9,3 +9,5 @@ class UserSkillAdmin(admin.ModelAdmin):
 
 
 admin.site.register(UserSkill, UserSkillAdmin)
+
+

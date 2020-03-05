@@ -2,14 +2,14 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.mail import send_mail
 from django.conf import settings
-from .models import UserSkill
+from .models import UserSkill,Skills
 from .forms import UserSkill
 from matchsource.match import match, printing
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import authenticate, login, logout
 from .forms import CreateUserForm , GitHubSearch
 from django.contrib import messages
-
+from UserSkillsParser.main import test
 
 def home(request):
     return render(request, 'matchsource/home.html')
@@ -111,8 +111,13 @@ def github(request):
         form = GitHubSearch(request.POST)
         
         if form.is_valid():
-            form.save()
-            return redirect('ms-home')
+            print(request.POST)
+            form.save(commit=False)
+            name = form.cleaned_data.get('github')
+            #name = request.POST['github'] 
+            test(name)
+
+            #return redirect('ms-home')
             #username = form.cleaned_data.get('username')
             #password = form.cleaned_data.get('password1')
             #github = form.cleaned_data.get('github')
@@ -126,4 +131,10 @@ def github(request):
     return render(request, 'matchsource/github.html',context)
 
 def matches(request):
-    return render(request, 'matchsource/matches.html')
+
+    username = ('ued2','try')
+
+    context = {
+        'data': username,
+    }
+    return render(request, 'matchsource/matches.html',context)

@@ -1,6 +1,6 @@
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
-from .models import UserSkill, ApiSpecific , GitHub
+from .models import UserSkill, ApiSpecific ,GitHub,Skills
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
@@ -9,15 +9,14 @@ from django.contrib.auth.models import User
 
 class UserSkill(forms.ModelForm):
     # name field
-    name = forms.Textarea(attrs={'class': 'form-control',
-                                 })
+    name = forms.Textarea()
     # email field
     email = forms.EmailField(
         widget=forms.EmailInput(attrs={'class': 'form-control',
                                        'placeholder': 'email@abc.com',
                                        }))
     # query skill from database
-    allskill = ApiSpecific.objects.distinct('general')
+    allskill = Skills.objects.distinct('class_name')
     skill = forms.ModelMultipleChoiceField(queryset=allskill, to_field_name='general', required=True,
                                            initial=0,
                                            label='Select your skills',
